@@ -1,0 +1,29 @@
+﻿  GLtest.cpp
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(24,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(25,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(31,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(31,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(32,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(32,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(33,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(33,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(34,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(34,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(52,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(57,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(57,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(58,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(58,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(59,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(59,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(60,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\Generator\GLtest.cpp(60,26): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+GLtest.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowPosition referenced in function main
+GLtest.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
+GLtest.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
+GLtest.obj : error LNK2019: unresolved external symbol __imp_glutDisplayFunc referenced in function main
+GLtest.obj : error LNK2019: unresolved external symbol __imp___glutInitWithExit referenced in function glutInit_ATEXIT_HACK
+GLtest.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowWithExit referenced in function glutCreateWindow_ATEXIT_HACK
+C:\OpenGLUT\freeglut\lib\freeglut.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\OpenGLUT\glew-1.11.0\lib\glew32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\x64\Debug\Generator.exe : fatal error LNK1120: 6 unresolved externals
