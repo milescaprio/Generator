@@ -1,10 +1,12 @@
 #include <GL/glut.h>
-#include<iostream>
+#include "includes.h"
 
 void islandMain();
 
 void init(int *argc, char** argv)
 {
+    generator::generate();
+
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

@@ -153,11 +153,11 @@
   <ItemGroup>
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NoiseGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Generator.h" />
-    <ClInclude Include="NoiseGenerator.h" />
+    <ClInclude Include="includes.h" />
+    <ClInclude Include="OpenSimplex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

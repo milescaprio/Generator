@@ -1,16 +1,9 @@
+
 #pragma once
 
-#include "NoiseGenerator.h"
+namespace generator {
+	void init();
+	void release();
 
-class Generator
-{
-public:
-	explicit Generator(NoiseGenerator generator): generator(generator) {}
-
-	void generate();
-	void applyVertices();
-
-private:
-	NoiseGenerator generator;
-};
-
+	int generate();
+}
