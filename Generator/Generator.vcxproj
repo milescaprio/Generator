@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Generator.h" />
     <ClInclude Include="includes.h" />
+    <ClInclude Include="NoiseUtil.h" />
     <ClInclude Include="OpenSimplex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

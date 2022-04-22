@@ -32,5 +32,8 @@
     <ClInclude Include="OpenSimplex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NoiseUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

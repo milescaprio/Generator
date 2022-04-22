@@ -355,7 +355,7 @@ public:
         }
     }
 
-    double Evaluate(double x, double y)
+    double Evaluate(double x, double y) const
     {
         double stretchOffset = (x + y) * STRETCH_2D;
         double xs = x + stretchOffset;
@@ -405,7 +405,7 @@ public:
         return value * NORM_2D;
     }
 
-    double Evaluate(double x, double y, double z)
+    double Evaluate(double x, double y, double z) const
     {
         double stretchOffset = (x + y + z) * STRETCH_3D;
         double xs = x + stretchOffset;
