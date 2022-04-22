@@ -1,7 +1,0 @@
-﻿GLtest.obj : error LNK2001: unresolved external symbol __imp___glutCreateWindowWithExit
-GLtest.obj : error LNK2001: unresolved external symbol __imp___glutInitWithExit
-GLtest.obj : error LNK2001: unresolved external symbol __imp_glutDisplayFunc
-GLtest.obj : error LNK2001: unresolved external symbol __imp_glutMainLoop
-GLtest.obj : error LNK2001: unresolved external symbol __imp_glutInitWindowPosition
-GLtest.obj : error LNK2001: unresolved external symbol __imp_glutInitWindowSize
-C:\Users\miles\OneDrive\Documents\_Visual Studio Projects\source\Generator\x64\Release\Generator.exe : fatal error LNK1120: 6 unresolved externals
