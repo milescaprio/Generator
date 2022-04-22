@@ -13,5 +13,7 @@ namespace generator {
 	void release();
 
 	int generate();
-	GLuint loadTexture();
+	//GLuint loadTexture();
+
+	unsigned char getpx(int r, int c);
 }
