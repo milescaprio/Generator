@@ -2,10 +2,13 @@
 
 void islandMain();
 
+GLuint text;
+
 void init(int *argc, char** argv)
 {
     generator::init();
     generator::generate();
+    text = generator::loadTexture();
 
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glMatrixMode(GL_PROJECTION);
@@ -30,10 +33,10 @@ void setColor(float r, float g, float b) {
 
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glPointSize(1.0);
-    islandMain();
-    glFlush();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindTexture(GL_TEXTURE_2D, text);
+    glutSolidCube(1.0);
+    glutSwapBuffers();
 }
 
 void islandMain() {
