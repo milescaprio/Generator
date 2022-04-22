@@ -1,5 +1,5 @@
 #pragma once
 
+#include <GL/glut.h>
 #include <iostream>
-#include "OpenSimplex.h"
 #include "Generator.h"

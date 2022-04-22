@@ -1,10 +1,10 @@
-#include <GL/glut.h>
 #include "includes.h"
 
 void islandMain();
 
 void init(int *argc, char** argv)
 {
+    generator::init();
     generator::generate();
 
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -46,5 +46,7 @@ int main(int argc, char** argv)
     init(&argc, argv);
     glutDisplayFunc(display);
     glutMainLoop();
+
+    generator::release();
     return 0;
 }

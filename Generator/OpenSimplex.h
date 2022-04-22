@@ -318,7 +318,7 @@ protected:
     };
     static StaticConstructor staticConstructor;
 
-    FORCE_INLINE static int FastFloor(double x)
+    inline static int FastFloor(double x)
     {
         int xi = static_cast<int>(x);
         return x < xi ? xi - 1 : xi;
