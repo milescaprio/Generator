@@ -50,6 +50,20 @@ namespace generator {
 		return 0;
 	}
 
+	GLuint loadTexture() {
+		GLuint out;
+		glGenTextures(1, &out);
+		glBindTexture(GL_TEXTURE_2D, out);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 1, WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, buff);
+
+		return out;
+	}
 
 	void release() {
 		delete noiseGen;

@@ -1,17 +1,16 @@
-
 #include "includes.h"
 
 void islandMain();
 
-//GLuint text;
+GLuint text;
 
 void init(int *argc, char** argv)
 {
     generator::init();
     generator::generate();
-    //text = generator::loadTexture();
+    text = generator::loadTexture();
     glutInit(argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(640, 480);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("Island");
@@ -34,12 +33,14 @@ void setColor(unsigned char r, unsigned char g, unsigned char b) {
 
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPointSize(2.0);
-    /*glColor4ub(255, 0, 255, 128);
+    /*glColor3ub(255, 0, 255);
     glBegin(GL_POINTS);
     glVertex2i(10, 10);
     glEnd();*/
+    glBindTexture(GL_TEXTURE_2D, text);
+    glutSolidCube(1.0);
     islandMain();
     glutSwapBuffers();
 }
