@@ -1,8 +1,9 @@
+
 #include "includes.h"
 
 void islandMain();
 
-GLuint text;
+//GLuint text;
 
 void init(int *argc, char** argv)
 {
@@ -14,7 +15,7 @@ void init(int *argc, char** argv)
     glutInitWindowSize(640, 480);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("Island");
-    glClearColor(0, 1.0, 0, 0);
+    //glClearColor(0, 0.0, 1.0, 0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 640.0, 0.0, 480.0);   
@@ -34,10 +35,12 @@ void setColor(unsigned char r, unsigned char g, unsigned char b) {
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glPointSize(1.0);
-    glColor3ub(255, 0, 255);
+    glPointSize(2.0);
+    /*glColor4ub(255, 0, 255, 128);
+    glBegin(GL_POINTS);
     glVertex2i(10, 10);
-    //islandMain();
+    glEnd();*/
+    islandMain();
     glutSwapBuffers();
 }
 
