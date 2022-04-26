@@ -2,13 +2,18 @@
 
 void islandMain();
 
-GLuint text;
+Generator biome;
+Generator elevation;
+
+inline int ubmap(unsigned char val, int first, int last) {
+    return (val * (last - first) / 255 + first);
+}
 
 void init(int *argc, char** argv)
 {
-    generator::init();
-    generator::generate();
-    text = generator::loadTexture();
+    biome.generate(WIDTH, HEIGHT);
+    elevation.generate(WIDTH, HEIGHT);
+    //text = generator::loadTexture();
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(640, 480);
@@ -39,8 +44,8 @@ void display()
     glBegin(GL_POINTS);
     glVertex2i(10, 10);
     glEnd();*/
-    glBindTexture(GL_TEXTURE_2D, text);
-    glutSolidCube(1.0);
+    /*glBindTexture(GL_TEXTURE_2D, text);
+    glutSolidCube(1.0);*/
     islandMain();
     glutSwapBuffers();
 }
@@ -49,9 +54,9 @@ void islandMain() {
     int t;
     for (int r = 0; r < HEIGHT; r++) {
         for (int c = 0; c < WIDTH; c++) {
-            setColor(t = generator::getpx(r, c), t, t);
-            std::cout << (float)t << "\n";
-            setPixel(r, c);
+            t = biome.getpx(r, c);
+            setColor(MOISTURERGB(t));
+            setPixel(c, HEIGHT - r);
         }
     }
 }
@@ -61,7 +66,5 @@ int main(int argc, char** argv)
     init(&argc, argv);
     glutDisplayFunc(display);
     glutMainLoop();
-
-    generator::release();
     return 0;
 }

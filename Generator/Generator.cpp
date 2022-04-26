@@ -17,57 +17,41 @@ static inline unsigned char clampc(double a) {
 	return b;
 }
 
-namespace generator {
-	namespace {
-		OpenSimplexNoise* noiseGen;
-		unsigned char* buff;
-	}
-
-	void init() {
-		noiseGen = new OpenSimplexNoise();
-	}
-
-	static void generateGenericHeightmap() {
-		buff = new unsigned char[WIDTH * HEIGHT];
-		int r, c;
-		double out;
-
-		for (r = 0; r < HEIGHT; r++) {
-			for (c = 0; c < WIDTH; c++) {
-				out = noise::octaveEvalute(*noiseGen, c, r, 8) + 127; // 0 to 254
-				buff[r * WIDTH + c] = clampc(out);
-			}
-		}
-	}
-
-	unsigned char getpx(int r, int c) {
-		return buff[r * WIDTH + c];
-	}
-
-	int generate() {
-		generateGenericHeightmap();
-		std::cout << "Finished!!!" << std::endl;
-		return 0;
-	}
-
-	GLuint loadTexture() {
-		GLuint out;
-		glGenTextures(1, &out);
-		glBindTexture(GL_TEXTURE_2D, out);
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, 1, WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, buff);
-
-		return out;
-	}
-
-	void release() {
-		delete noiseGen;
+void Generator::generateGenericHeightmap(size_t w, size_t h) {
+	w_ = w;
+	h_ = h;
+	if (buff) {
 		delete buff;
 	}
+	buff = new unsigned char[w_ * h_];
+	int r, c;
+	double out;
+
+	for (r = 0; r < h_; r++) {
+		for (c = 0; c < w_; c++) {
+			out = noise::octaveEvalute(*noiseGen, c, r, 8) + 127; // 0 to 254
+			buff[r * w_ + c] = clampc(out);
+		}
+	}
+}
+
+Generator::Generator() {
+	noiseGen = new OpenSimplexNoise();
+}
+Generator::Generator(int64_t seed) {
+	noiseGen = new OpenSimplexNoise(seed);
+}
+Generator::~Generator() {
+	delete noiseGen;
+	delete buff;
+}
+
+unsigned char Generator::getpx(int r, int c) {
+	return buff[r * w_ + c];
+}
+
+int Generator::generate(size_t w, size_t h) {
+	generateGenericHeightmap(w, h);
+	return 0;
 }
 
