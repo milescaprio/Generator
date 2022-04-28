@@ -40,7 +40,7 @@ void setColor(unsigned char r, unsigned char g, unsigned char b) {
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPointSize(2.0);
+    glPointSize(4.0);
     /*glColor3ub(255, 0, 255);
     glBegin(GL_POINTS);
     glVertex2i(10, 10);
