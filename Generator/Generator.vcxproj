@@ -153,12 +153,14 @@
   <ItemGroup>
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VirtualTurtle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Generator.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="NoiseUtil.h" />
     <ClInclude Include="OpenSimplex.h" />
+    <ClInclude Include="VirtualTurtle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

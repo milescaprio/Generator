@@ -2,7 +2,9 @@
 
 #include <GL/glut.h>
 #include <iostream>
+#include <random>
 #include "Generator.h"
+#include "VirtualTurtle.h"
 
 const int SEED = 100;
 const int WIDTH = 640;
