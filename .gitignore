@@ -4,6 +4,9 @@ Release/
 Generator/Release/
 Generator/x64/
 Generator/Debug/
+Generator/bin
+Generator/obj
+Generator/generator
 Debug/
 *.obj
 *.pdb
