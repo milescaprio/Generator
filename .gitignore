@@ -3,3 +3,11 @@ x64/
 Release/
 Generator/Release/
 Generator/x64/
+Generator/Debug/
+Debug/
+*.obj
+*.pdb
+*.idb
+*.tlog
+*.exe
+Generator/VirtualTurtleV1.0.0.zip

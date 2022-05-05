@@ -6,9 +6,12 @@
 #include "Generator.h"
 #include "VirtualTurtle.h"
 
-const int SEED = 100;
-const int WIDTH = 640;
-const int HEIGHT = 480;
+#define STARTX 200
+#define STARTY 200
+#define SEED 100
+#define WIDTH 1000
+#define HEIGHT 1000
+
 #define DEAD_R 198
 #define DEAD_G 171
 #define DEAD_B 114

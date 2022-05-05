@@ -17,13 +17,13 @@ void init(int *argc, char** argv)
     //text = generator::loadTexture();
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize(640, 480);
+    glutInitWindowSize(WIDTH, HEIGHT);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("Island");
     glClearColor(0, 0.0, 1.0, 0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 640.0, 0.0, 480.0);   
+    gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);   
 }
 
 void setPixel(GLint x, GLint y)
@@ -31,16 +31,25 @@ void setPixel(GLint x, GLint y)
     glBegin(GL_POINTS);
     glVertex2i(x, y);
     glEnd();
+    //glutSwapBuffers();
 }
 
 void setColor(unsigned char r, unsigned char g, unsigned char b) {
     glColor3ub(r, g, b);
 }
 
+void inline displayStart() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glPointSize(1.0);
+}
+
+void inline displayEnd() {
+    glutSwapBuffers();
+}
+
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPointSize(4.0);
+    displayStart();
     /*glColor3ub(255, 0, 255);
     glBegin(GL_POINTS);
     glVertex2i(10, 10);
@@ -49,7 +58,7 @@ void display()
     glutSolidCube(1.0);*/
     //islandMain();
     cutIsland();
-    glutSwapBuffers();
+    displayEnd();
 }
 
 void islandMain() {
@@ -74,15 +83,29 @@ void cutIsland() {
     VirtualTurtle t;
     t.setColorFunc(setColor);
     t.setPixelFunc(setPixel);
+    t.tp(STARTX, STARTY);
     t.forward(width);
     t.pendown();
-    t.tp(200, 200);
     t.left(90);
-    while (t.gety() >= 0 or t.getx() <= 0) { //we will make three quarters oval until we have better while stopper
-        float rad = sqrt((t.gety() / height) * (t.gety() / height) + (t.getx() / width) * (t.getx() / width)); //"turtle radius multiplier"
+    /*for (int i = 0; i < 12; i++) {
+        t.left(30);
+        t.forward(100);
+    }*/
+    /*for (int i = 90; i > 85; --i) {
+        t.left(i);
+        t.forward(i);
+    }*/
+    
+    while (t.gety() >= 0 or t.getx() <= 0)
+    /*for (int i = 0; i < 5; i++)*/ { //we will make three quarters oval until we have better while stopper
+        float rad = sqrt(((t.gety() - STARTY) / height) * ((t.gety() - STARTY) / height) + ((t.getx() - STARTX) / width) * ((t.getx() - STARTX) / width)); //"turtle radius multiplier"
         t.left(stability * (distribution(generator) + (rad - 1.00) * wandering));
+        //std::cout << rad << "___" << t.getheading() << "\n";
         t.forward(step);
     }
+    /*for (int i = 0; i < 100; i++) {
+        std::cout << distribution(generator) << "\n";
+    }*/
 }
 
 int main(int argc, char** argv)

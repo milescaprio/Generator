@@ -11,13 +11,14 @@ private:
     unsigned char r_ = 0;
     unsigned char g_ = 0;
     unsigned char b_ = 0;
-    float angle_ = 0; //facing right, like the unit circle
+    float angle_ = 0; //starts facing 0 right, like the unit circle
+    float step_ = 1;
     bool pendown_ = true;
     void (*color_)(unsigned char, unsigned char, unsigned char);
     void (*pixel_)(graphicsint, graphicsint);
 public:
     void setColorFunc(void (*func)(unsigned char, unsigned char, unsigned char)) {
-        color_ = func; 
+        color_ = func;
     }
     void setPixelFunc(void (*func)(graphicsint, graphicsint)) {
         pixel_ = func;
@@ -41,5 +42,11 @@ public:
     }
     graphicsint gety() {
         return y_;
+    }
+    float getheading() {
+        return angle_;
+    }
+    void turn(float angle) {
+        angle_ = angle;
     }
 };
