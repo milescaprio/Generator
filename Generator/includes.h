@@ -1,4 +1,5 @@
 #pragma once
+#pragma inline_recursion(on)
 
 #include <GL/glut.h>
 #include <iostream>
@@ -6,8 +7,10 @@
 #include "Generator.h"
 #include "VirtualTurtle.h"
 
-#define STARTX 200
-#define STARTY 200
+#define PI 3.14159265
+
+#define STARTX 500
+#define STARTY 500
 #define SEED 100
 #define WIDTH 1000
 #define HEIGHT 1000

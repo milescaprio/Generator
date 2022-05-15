@@ -10,6 +10,39 @@ inline int ubmap(unsigned char val, int first, int last) {
     return (val * (last - first) / 255 + first);
 }
 
+float anglerange(float a) { //inefficient but whatever
+    while (a < 0) {
+        a += 360;
+    }
+    while (a >= 360) {
+        a -= 360;
+    }
+    /*if (a < 0) {
+        return anglerange(a + 360);
+    }
+    if (a >= 360) {
+        return anglerange(a - 360);
+    }*/
+    return a;
+}
+
+// aa < ab
+bool isAngleGreater(float aa, float ab) {
+    float ad = anglerange(aa - ab);
+    if (ad < 180) {
+        return true;
+    }
+    return false;
+}
+
+bool isAngleLess(float aa, float ab) {
+    float ad = anglerange(aa - ab);
+    if (ad > 180) {
+        return true;
+    }
+    return false;
+}
+
 void init(int *argc, char** argv)
 {
     biome.generate(WIDTH, HEIGHT);
@@ -73,7 +106,7 @@ void islandMain() {
 }
 
 void cutIsland() {
-    std::default_random_engine generator;
+    std::default_random_engine generator(111);
     std::normal_distribution<double> distribution(0.0, 1.0);
     float stability = 3.0; //normal turn multiplier, higher makes more quick turns
     float wandering = 6.0; //multiplied by current "turtle radius multiplier" (1.00 is subtracted to get a value surrounding 0) and then added to random turn; lower allows more wandering
@@ -84,28 +117,35 @@ void cutIsland() {
     t.setColorFunc(setColor);
     t.setPixelFunc(setPixel);
     t.tp(STARTX, STARTY);
+    t.penup();
     t.forward(width);
     t.pendown();
     t.left(90);
-    /*for (int i = 0; i < 12; i++) {
-        t.left(30);
-        t.forward(100);
-    }*/
-    /*for (int i = 90; i > 85; --i) {
-        t.left(i);
-        t.forward(i);
-    }*/
-    
-    while (t.gety() >= 0 or t.getx() <= 0)
-    /*for (int i = 0; i < 5; i++)*/ { //we will make three quarters oval until we have better while stopper
-        float rad = sqrt(((t.gety() - STARTY) / height) * ((t.gety() - STARTY) / height) + ((t.getx() - STARTX) / width) * ((t.getx() - STARTX) / width)); //"turtle radius multiplier"
-        t.left(stability * (distribution(generator) + (rad - 1.00) * wandering));
-        //std::cout << rad << "___" << t.getheading() << "\n";
+    bool hasDipped = false; //it goes down then back up again
+    while (t.gety() <= STARTY || hasDipped == false) {
+        float rad = sqrt(((t.gety() - STARTY) / (float)height) * ((t.gety() - STARTY) / (float)height) + ((t.getx() - STARTX) / (float)width) * ((t.getx() - STARTX) / (float)width)); //"turtle radius multiplier"
+        float turn = stability * (distribution(generator) + (rad - 1.00) * wandering);
+        t.left(turn);
+        if (t.getx() == STARTX || t.gety() == STARTY) { 
+            t.forward(step);
+            continue;
+        }
+        float centerDirection = atan((float)(t.gety() - STARTY) / (float)(t.getx() - STARTX)) * (180.0 / PI);
+        if (centerDirection < 0) {
+            centerDirection += 180;
+        }
+        /*                             + 90 because that's the direction of the turtle at the beginning, - because the ange thing starts facing inwards*/
+        std::cout << centerDirection << "___" << t.getheading() << "___" << t.getx() << "___" << t.gety() << "\n";
+        if ((t.gety() > STARTY ? isAngleGreater : isAngleLess)(centerDirection, t.getheading())) {
+            t.right(turn);
+            std::cout << "\n";
+            continue;
+        }
         t.forward(step);
+        if (t.gety() < STARTY) {
+            hasDipped = true; //could be more efficient by stopping this check once it's true, with a second while loop after, but thatd be bad code. And this is a bad comment.
+        }
     }
-    /*for (int i = 0; i < 100; i++) {
-        std::cout << distribution(generator) << "\n";
-    }*/
 }
 
 int main(int argc, char** argv)
