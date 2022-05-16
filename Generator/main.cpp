@@ -26,21 +26,12 @@ float anglerange(float a) { //inefficient but whatever
     return a;
 }
 
-// aa < ab
-bool isAngleGreater(float aa, float ab) {
-    float ad = anglerange(aa - ab);
-    if (ad < 180) {
-        return true;
-    }
-    return false;
+float dist(float x1, float y1, float x2, float y2) {
+    return sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
 }
 
-bool isAngleLess(float aa, float ab) {
-    float ad = anglerange(aa - ab);
-    if (ad > 180) {
-        return true;
-    }
-    return false;
+float dist(float x1, float y1, float x2, float y2, float xm, float ym) { //multipliers for the sides, because we are measuring the oval like it's a circle
+    return sqrt(((y2 - y1) * ym) * ((y2 - y1) * ym) + ((x2 - x1) * xm) * ((x2 - x1) * xm));
 }
 
 void init(int *argc, char** argv)
@@ -121,31 +112,44 @@ void cutIsland() {
     t.forward(width);
     t.pendown();
     t.left(90);
-    bool hasDipped = false; //it goes down then back up again
-    while (t.gety() <= STARTY || hasDipped == false) {
-        float rad = sqrt(((t.gety() - STARTY) / (float)height) * ((t.gety() - STARTY) / (float)height) + ((t.getx() - STARTX) / (float)width) * ((t.getx() - STARTX) / (float)width)); //"turtle radius multiplier"
+    while (t.gety() >= STARTY || t.getx() <= STARTX) { //first three quadrants (last one has a different algoritm to approach the correct spot)
+        float rad = dist(STARTX, STARTY, t.getx(), t.gety(), 1/(float)width, 1/(float)height); //"turtle radius multiplier"
         float turn = stability * (distribution(generator) + (rad - 1.00) * wandering);
         t.left(turn);
         if (t.getx() == STARTX || t.gety() == STARTY) { 
             t.forward(step);
             continue;
         }
-        float centerDirection = atan((float)(t.gety() - STARTY) / (float)(t.getx() - STARTX)) * (180.0 / PI);
-        if (centerDirection < 0) {
-            centerDirection += 180;
-        }
-        /*                             + 90 because that's the direction of the turtle at the beginning, - because the ange thing starts facing inwards*/
-        std::cout << centerDirection << "___" << t.getheading() << "___" << t.getx() << "___" << t.gety() << "\n";
-        if ((t.gety() > STARTY ? isAngleGreater : isAngleLess)(centerDirection, t.getheading())) {
+        float centerDirection = VirtualTurtle::ucAngle(STARTX, STARTY, t.getx(), t.gety());
+        if (VirtualTurtle::isAngleGreater(centerDirection, t.getheading())) {
             t.right(turn);
-            std::cout << "\n";
             continue;
         }
         t.forward(step);
-        if (t.gety() < STARTY) {
-            hasDipped = true; //could be more efficient by stopping this check once it's true, with a second while loop after, but thatd be bad code. And this is a bad comment.
-        }
     }
+    while (t.gety() < STARTY) { //last quadrant (last one has a different algoritm to approach the correct spot) tie-up
+        float rad = dist(STARTX, STARTY, t.getx(), t.gety(), 1 / (float)width, 1 / (float)height); //"turtle radius multiplier"
+        float ovalturn = stability * (distribution(generator) + (rad - 1.00) * wandering);
+        float enddirection = VirtualTurtle::ucAngle(t.getx(), t.gety(), STARTX + width, STARTY);
+        float ovalturnmultiplier = ((float)STARTY - (float)t.gety()) / height;
+        if (ovalturnmultiplier > 1) {
+            ovalturnmultiplier = 1;
+        }
+        float turn = ovalturnmultiplier * ovalturn + (1 - ovalturnmultiplier) * (enddirection - t.getheading());
+        t.left(turn);
+        if (t.getx() == STARTX || t.gety() == STARTY) {
+            t.forward(step);
+            continue;
+        }
+        float centerDirection = VirtualTurtle::ucAngle(STARTX, STARTY, t.getx(), t.gety());
+        if (VirtualTurtle::isAngleGreater(centerDirection, t.getheading())) {
+            t.right(turn);
+            continue;
+        }
+        t.forward(step);
+        //std::cout << "thinged " << t.getx() << " " << t.gety() << " " << t.getheading() << "\n";
+    }
+    //std::cout << "ended " << t.getx() << " " << t.gety() << " " << t.getheading() << "\n";
 }
 
 int main(int argc, char** argv)

@@ -28,6 +28,10 @@ public:
     void right(float angle);
     void tp(float x, float y);
     void move(float x, float y);
+    static float anglerange(float a);
+    static bool isAngleGreater(float aa, float ab);
+    static bool isAngleLess(float aa, float ab);
+    static float ucAngle(float x1, float y1, float x2, float y2);
     void penup() {
         pendown_ = false; 
     }
@@ -44,9 +48,10 @@ public:
         return y_;
     }
     float getheading() {
-        return angle_;
+        return anglerange(angle_);
     }
     void turn(float angle) {
         angle_ = angle;
     }
+
 };

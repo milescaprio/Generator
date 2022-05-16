@@ -105,3 +105,45 @@ void VirtualTurtle::move(float x, float y)
 	}
 }
 
+float VirtualTurtle::anglerange(float a) { //inefficient but whatever
+	while (a < 0) {
+		a += 360;
+	}
+	while (a >= 360) {
+		a -= 360;
+	}
+	/*if (a < 0) {
+		return anglerange(a + 360);
+	}
+	if (a >= 360) {
+		return anglerange(a - 360);
+	}*/
+	return a;
+}
+// aa < ab
+bool VirtualTurtle::isAngleGreater(float aa, float ab) {
+	float ad = anglerange(aa - ab);
+	if (ad < 180) {
+		return true;
+	}
+	return false;
+}
+
+bool VirtualTurtle::isAngleLess(float aa, float ab) {
+	float ad = anglerange(aa - ab);
+	if (ad > 180) {
+		return true;
+	}
+	return false;
+}
+
+float VirtualTurtle::ucAngle(float x1, float y1, float x2, float y2) { //unit-circle format angle, undefined behavior for expected outputs of 0, 90, 180, and 270, as they aren't distinguishable inputs
+	float ret = atan((y2 - y1) / (x2 - x1)) * (180.0 / PI);
+	if (ret < 0) {
+		ret += 180;
+	}
+	if (y2 < y1) {
+		ret += 180;
+	}
+	return ret;
+}
