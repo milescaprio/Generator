@@ -5,6 +5,7 @@
 #include <iostream>
 #include <random>
 #include "Generator.h"
+#include "Mesh.h"
 #include "VirtualTurtle.h"
 
 #define PI 3.14159265

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "includes.h"
-
+class Mesh;
 typedef int graphicsint; //change to something in your graphics library for efficiency if you need
 
 class VirtualTurtle {
@@ -32,6 +32,9 @@ public:
     static bool isAngleGreater(float aa, float ab);
     static bool isAngleLess(float aa, float ab);
     static float ucAngle(float x1, float y1, float x2, float y2);
+    static float dist(float x1, float y1, float x2, float y2);
+    static float dist(float x1, float y1, float x2, float y2, float xm, float ym);
+
     void penup() {
         pendown_ = false; 
     }
@@ -49,9 +52,10 @@ public:
     }
     float getheading() {
         return anglerange(angle_);
-    }
+    } 
     void turn(float angle) {
         angle_ = angle;
     }
-
+    void updateMesh(Mesh& m);
+    void followMesh(Mesh& m);
 };
