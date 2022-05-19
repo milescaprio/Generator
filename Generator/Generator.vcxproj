@@ -151,17 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AreaSlice.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Pixels.cpp" />
     <ClCompile Include="VirtualTurtle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreaSlice.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="NoiseUtil.h" />
     <ClInclude Include="OpenSimplex.h" />
+    <ClInclude Include="Pixels.h" />
     <ClInclude Include="VirtualTurtle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,20 +1,25 @@
 #pragma once
 #pragma inline_recursion(on)
 
+typedef int P;
+
 #include <GL/glut.h>
 #include <iostream>
 #include <random>
 #include "Generator.h"
 #include "Mesh.h"
+#include "Pixels.h"
+#include "AreaSlice.h"
 #include "VirtualTurtle.h"
 
 #define PI 3.14159265
 
 #define STARTX 500
 #define STARTY 500
-#define SEED 100
+#define SEED 106
 #define WIDTH 1000
 #define HEIGHT 1000
+#define TOL 3.0
 
 #define DEAD_R 198
 #define DEAD_G 171

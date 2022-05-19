@@ -131,11 +131,21 @@ void VirtualTurtle::move(float x, float y)
 	}
 }
 
-float VirtualTurtle::anglerange(float a) { //inefficient but whatever
+float VirtualTurtle::anglerange(float a) {
 	while (a < 0) {
 		a += 360;
 	}
 	while (a >= 360) {
+		a -= 360;
+	}
+	return a;
+}
+
+float VirtualTurtle::signedanglerange(float a) {
+	while (a < -180) {
+		a += 360;
+	}
+	while (a >= 180) {
 		a -= 360;
 	}
 	return a;

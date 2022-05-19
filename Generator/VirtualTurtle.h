@@ -29,6 +29,7 @@ public:
     void tp(float x, float y);
     void move(float x, float y);
     static float anglerange(float a);
+    static float signedanglerange(float a);
     static bool isAngleGreater(float aa, float ab);
     static bool isAngleLess(float aa, float ab);
     static float ucAngle(float x1, float y1, float x2, float y2);
