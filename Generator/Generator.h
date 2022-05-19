@@ -6,6 +6,7 @@ const char THRESHOLD = -24;
 
 class Generator {
 private:
+	const float scale = 0.6;
 	OpenSimplexNoise* noiseGen;
 	unsigned char* buff = nullptr;
 	size_t w_ = 0;

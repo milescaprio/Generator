@@ -9,6 +9,12 @@ class Pixels;
 struct Pixel {
     P x;
     P y;
+    Pixel() = default;
+    Pixel(P x_, P y_) {
+        x = x_;
+        y = y_;
+    }
+    Pixel(const Pixel& p) : Pixel(p.x, p.y) {}
 };
 
 class Pixels {

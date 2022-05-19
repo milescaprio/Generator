@@ -4,6 +4,7 @@
 
 class Pixels;
 
+struct Pixel;
 struct Slice {
     float x1;
     float x2;
@@ -50,5 +51,5 @@ public:
         stack_ = {};
     }
     Pixels pixels();
-    
+    Pixel readPixel(); //gets next pixel for iterating without generating a full cache 
 };

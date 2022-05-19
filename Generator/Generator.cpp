@@ -29,7 +29,7 @@ void Generator::generateGenericHeightmap(size_t w, size_t h) {
 
 	for (r = 0; r < h_; r++) {
 		for (c = 0; c < w_; c++) {
-			out = noise::octaveEvalute(*noiseGen, c, r, 8) + 127; // 0 to 254
+			out = noise::octaveEvalute(*noiseGen, c * scale, r * scale, 8) + 127; // 0 to 254
 			buff[r * w_ + c] = clampc(out);
 		}
 	}

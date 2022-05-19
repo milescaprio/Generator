@@ -9,7 +9,7 @@ float mapy(float x1, float y1, float x2, float y2, float x) {
 }
 
 bool isWithin(float n, float a, float b) {
-	return (a <= n && n <= b) || (a >= n && n >= b);
+	return (a <= n && n < b) || (a > n && n >= b);
 }
 
 void Mesh::rotate(float midx, float midy, float ang) {
@@ -49,18 +49,12 @@ AreaSlice Mesh::containment() {
 			miny = mesh_[i].y;
 		}
 	}
-	/*
-	does this function work
-	should i include the last pixel?
-	should i add 0.5 to the pixels?
-	0.5 might center the pixels better
-	*/
 	std::vector<float> crosspoints;
 	for (P y = miny; y <= maxy; y++) { //for each pixel-y in the stack range
 		crosspoints = {};
 		for (size_t i = 1; i < mesh_.size(); i++) { //for each mesh point
-			if (isWithin((float)y + 0.5, mesh_[i - 1].y, mesh_[i].y)) {//if the pixel-y fits in the mesh line
-				crosspoints.push_back(mapx(mesh_[i - 1].x, mesh_[i - 1].y, mesh_[i].x, mesh_[i].y, (float)y + 0.5/*Fairer pixel distribution*/));
+			if (isWithin((float)y, mesh_[i - 1].y, mesh_[i].y)) {//if the pixel-y fits in the mesh line
+				crosspoints.push_back(mapx(mesh_[i - 1].x, mesh_[i - 1].y, mesh_[i].x, mesh_[i].y, (float)y));
 			}
 		}
 		std::sort(crosspoints.begin(), crosspoints.end());
