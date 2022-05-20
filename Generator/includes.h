@@ -21,6 +21,8 @@ typedef unsigned char shade;
 #define HEIGHT 750
 #define TOL 3.0
 
+//#define REDOMAPS /*for if you want the noise maps to regenerate every click*/
+
 #define DEAD_R 198
 #define DEAD_G 171
 #define DEAD_B 114

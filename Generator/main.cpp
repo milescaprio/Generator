@@ -178,7 +178,12 @@ void display()
 {
     displayStart();
     Mesh m = cutIsland();
+
     AreaSlice a = m.containment();
+    /*for (Pixel p = a.readPixel(); p.x != -1; p = a.readPixel()) {
+        setColor(251, 145, 155);
+        setPixel(p.y, HEIGHT - p.x);
+    }*/
     //Pixels island = a.pixels(); //very memory consuming, better off with an iterator instead of a full cache
     islandMain(a);
     displayEnd();
@@ -189,10 +194,16 @@ void onMouseButton(int button, int state, int, int)
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         SEED++;
     }
-    /*biome.generate(WIDTH, HEIGHT);
+#ifdef REDOMAPS
+    biome.changeSeed(SEED);
+    elevation.changeSeed(SEED + 1);
+    rockiness1.changeSeed(SEED + 2);
+    rockiness2.changeSeed(SEED + 3);
+    biome.generate(WIDTH, HEIGHT);
     elevation.generate(WIDTH, HEIGHT);
     rockiness1.generate(WIDTH, HEIGHT);
-    rockiness2.generate(WIDTH, HEIGHT);*/
+    rockiness2.generate(WIDTH, HEIGHT);
+#endif
 }
 
 void islandMain(AreaSlice& island) {
@@ -225,7 +236,7 @@ Mesh cutIsland() {
     t.setColorFunc(setColor);
     t.setPixelFunc(setPixel);
     t.tp(STARTX, STARTY);
-    t.penup();
+    t.pendown();
     t.forward(width);
     t.left(90);
     t.updateMesh(m); //equivalent to m.add(t.getx(),t.gety())

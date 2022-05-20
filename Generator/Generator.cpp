@@ -50,6 +50,11 @@ unsigned char Generator::getpx(int r, int c) {
 	return buff[r * w_ + c];
 }
 
+void Generator::changeSeed(unsigned int seed){
+	delete noiseGen;
+	noiseGen = new OpenSimplexNoise(seed);
+}
+
 int Generator::generate(size_t w, size_t h) {
 	generateGenericHeightmap(w, h);
 	return 0;

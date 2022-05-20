@@ -19,7 +19,7 @@ public:
 	~Generator();
 
 	unsigned char getpx(int r, int c);
-
+	void changeSeed(unsigned seed);
 	int generate(size_t w, size_t h);
 };
 
