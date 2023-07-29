@@ -1,6 +1,5 @@
 .vs/
 x64/
-Release/
 Generator/Release/
 Generator/x64/
 Generator/Debug/
@@ -12,7 +11,6 @@ Debug/
 *.pdb
 *.idb
 *.tlog
-*.exe
 Generator/VirtualTurtleV1.0.0.zip
 Generator/known issues and discord.docx
 Generator/VirtualTurtleV2.0.0.zip
